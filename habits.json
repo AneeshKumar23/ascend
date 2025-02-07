@@ -14,21 +14,5 @@
         "streak": 15,
         "reminder": false,
         "priority": "medium"
-    },
-    {
-        "id": 3,
-        "title": "Exercise",
-        "time": "18:00",
-        "streak": 3,
-        "reminder": true,
-        "priority": "low"
-    },
-    {
-        "id": 4,
-        "title": "q2w",
-        "time": "12:12",
-        "priority": "medium",
-        "reminder": false,
-        "streak": 0
     }
 ]

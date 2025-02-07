@@ -21,18 +21,6 @@ function Habits() {
     priority: "medium",
   });
 
-  const handleDelete = (id) => {
-    setHabits(habits.filter((habit) => habit.id !== id));
-  };
-
-  const toggleReminder = (id) => {
-    setHabits(
-      habits.map((habit) =>
-        habit.id === id ? { ...habit, reminder: !habit.reminder } : habit
-      )
-    );
-  };
-
   const handleEditHabit = (habit) => {
     setEditingHabit(habit);
     setNewHabit({
@@ -96,6 +84,19 @@ function Habits() {
       setEditingHabit(null);
       setShowAddModal(false);
     }
+  };
+
+  const handleDelete = async (id) => {
+    const response = await fetch(`http://localhost:8080/habits/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      console.error("Error deleting habit");
+      return;
+    }
+
+    setHabits(habits.filter((habit) => habit.id !== id));
   };
 
   const getPriorityColor = (priority) => {
