@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .venv
+env
 __pycache__/
 *.pyc
 *.pyo
