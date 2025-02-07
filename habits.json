@@ -1,11 +1,29 @@
 [
-    {
-        "id": 1,
-        "xp": 50,
-        "title": "dog",
-        "time": "12:06",
-        "priority": "medium",
-        "reminder": false,
-        "streak": 3
-    }
+  {
+    "id": 1,
+    "xp": 50,
+    "title": "Leetcoding",
+    "time": "20:00",
+    "priority": "high",
+    "reminder": false,
+    "streak": 2
+  },
+  {
+    "id": 2,
+    "xp": 50,
+    "title": "Workout",
+    "time": "12:00",
+    "priority": "medium",
+    "reminder": false,
+    "streak": 2
+  },
+  {
+    "id": 3,
+    "xp": 50,
+    "title": "System design Learning",
+    "time": "12:00",
+    "priority": "medium",
+    "reminder": false,
+    "streak": 2
+  }
 ]

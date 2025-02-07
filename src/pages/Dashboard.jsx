@@ -47,6 +47,8 @@ function Dashboard() {
       .catch((error) => console.error("Error fetching habits:", error));
   }, []);
 
+  console.log(tasks[1]);
+
   const level = Math.floor(progress.xp / 1000) + 1;
   const currentLevelXP = progress.xp % 1000;
   const nextLevelXP = 1000;
@@ -198,9 +200,7 @@ function Dashboard() {
             </div>
             <div>
               <div className="text-xs text-gray-400">Day Streak</div>
-              <div className="text-lg font-bold text-white">
-                {progress.streak}
-              </div>
+              <div className="text-lg font-bold text-white">{3}</div>
             </div>
           </div>
         </div>
