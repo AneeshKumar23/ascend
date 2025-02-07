@@ -53,6 +53,7 @@ def add_habit(habit: Habit):
 
     new_habit = {
         "id": len(habits) + 1,
+        "xp": 50,
         **habit.dict(),
     }
 
