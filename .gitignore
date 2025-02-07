@@ -17,6 +17,12 @@ __pycache__/
 *.pyo
 
 
+__pycache__/
+.venv/
+*.pyc
+*.pyo
+*.pyd
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -27,3 +33,4 @@ __pycache__/
 *.njsproj
 *.sln
 *.sw?
+__pycache__/master.cpython-312.pyc
