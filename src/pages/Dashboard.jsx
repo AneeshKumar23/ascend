@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+
 import {
   Target,
   Trophy,
@@ -36,23 +37,13 @@ function Dashboard() {
     type: "",
     xp: 0,
   });
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Morning Meditation",
-      completed: false,
-      xp: 50,
-      priority: "high",
-    },
-    {
-      id: 2,
-      title: "Read 30 minutes",
-      completed: false,
-      xp: 30,
-      priority: "medium",
-    },
-    { id: 3, title: "Workout", completed: false, xp: 40, priority: "high" },
-  ]);
+  const [tasks, setTasks] = useState([]);
+  useEffect(() => {
+    fetch("/habits.json")
+      .then((response) => response.json())
+      .then((data) => setTasks(data))
+      .catch((error) => console.error("Error fetching habits:", error));
+  }, []);
 
   const level = Math.floor(progress.xp / 1000) + 1;
   const currentLevelXP = progress.xp % 1000;

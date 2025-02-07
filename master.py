@@ -88,6 +88,23 @@ def delete_habit(habit_id: int):
     save_habits(updated_habits)
     return {"message": "Habit deleted successfully"}
 
+# Increment streak when habit is completed
+@app.patch("/habits/{habit_id}/streak")
+def update_streak(habit_id: int, completed: bool):
+    habits = load_habits()
+
+    for habit in habits:
+        if habit["id"] == habit_id:
+            if completed:
+                habit["streak"] += 1
+            else:
+                habit["streak"] = max(0, habit["streak"] - 1)  # Avoid negative streak
+
+            save_habits(habits)
+            return {"message": "Streak updated", "habit": habit}
+
+    raise HTTPException(status_code=404, detail="Habit not found")
+
 # Allow CORS for frontend requests
 app.add_middleware(
     CORSMiddleware,
