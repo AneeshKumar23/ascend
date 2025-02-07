@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "Early Bird",
+    "description": "Complete morning routine for 7 days straight",
+    "progress": 0,
+    "completed": false,
+    "icon": "🌅",
+    "xpReward": 100,
+    "requirement": 7,
+    "category": "routine"
+  },
+  {
+    "id": 2,
+    "title": "Bookworm",
+    "description": "Read for 30 minutes every day for 14 days",
+    "progress": 0,
+    "completed": false,
+    "icon": "📚",
+    "xpReward": 200,
+    "requirement": 14,
+    "category": "reading"
+  },
+  {
+    "id": 3,
+    "title": "Fitness Fanatic",
+    "description": "Exercise 20 times in a month",
+    "progress": 0,
+    "completed": false,
+    "icon": "💪",
+    "xpReward": 300,
+    "requirement": 20,
+    "category": "fitness"
+  },
+  {
+    "id": 4,
+    "title": "Advanced Fitness",
+    "description": "Exercise 40 times in 2 months",
+    "progress": 0,
+    "completed": false,
+    "icon": "🏋️",
+    "xpReward": 500,
+    "requirement": 40,
+    "category": "fitness"
+  },
+  {
+    "id": 5,
+    "title": "Night Owl",
+    "description": "Stay productive at night for 7 days",
+    "progress": 0,
+    "completed": false,
+    "icon": "🌙",
+    "xpReward": 150,
+    "requirement": 7,
+    "category": "routine"
+  }
+]
