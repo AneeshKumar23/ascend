@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "id": 1,
         "title": "Morning Meditation",
         "time": "07:00",
@@ -8,6 +9,8 @@
         "priority": "high"
     },
     {
+=======
+>>>>>>> eb9f383f8290e71ca3a45703581f0547cc618594
         "id": 2,
         "title": "cow",
         "time": "20:00",
@@ -24,9 +27,15 @@
         "streak": 0
     },
     {
+<<<<<<< HEAD
         "id": 4,
         "title": "Cow Watching",
         "time": "01:20",
+=======
+        "id": 3,
+        "title": "target",
+        "time": "00:00",
+>>>>>>> eb9f383f8290e71ca3a45703581f0547cc618594
         "priority": "high",
         "reminder": false,
         "streak": 0
