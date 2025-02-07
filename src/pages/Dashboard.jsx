@@ -88,6 +88,40 @@ function Dashboard() {
     }
   };
 
+  const [habits, setHabits] = useState(tasks);
+
+  useEffect(() => {
+    setHabits(tasks);
+  }, [tasks]);
+
+  const updateStreak = async (habitid, completed = true) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/habits/${habitid}/streak`, // ✅ Corrected endpoint
+        {
+          method: "PATCH", // ✅ Correct method
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ completed }), // ✅ Send completed boolean
+        }
+      );
+
+      if (response.ok) {
+        const updatedHabit = await response.json();
+        setHabits((prevHabits) =>
+          prevHabits.map((habit) =>
+            habit.id === habitid
+              ? { ...habit, streak: updatedHabit.habit.streak }
+              : habit
+          )
+        );
+      } else {
+        console.error("Failed to update streak:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error updating streak:", error);
+    }
+  };
+
   return (
     <div className="relative min-h-screen bg-gray-900 pb-32">
       <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-gray-900"></div>
@@ -175,7 +209,7 @@ function Dashboard() {
         <div className="px-4 pb-32">
           <h2 className="text-xl font-bold text-white mb-4">Today's Quests</h2>
           <div className="space-y-3">
-            {tasks
+            {habits
               .sort((a, b) => {
                 const priorityOrder = { high: 0, medium: 1, low: 2 };
                 return priorityOrder[a.priority] - priorityOrder[b.priority];
@@ -191,7 +225,11 @@ function Dashboard() {
                     <input
                       type="checkbox"
                       checked={task.completed}
-                      onChange={() => handleTaskToggle(task.id)}
+                      onChange={() => {
+                        const isCompleted = !task.completed; // Toggle completed state
+                        handleTaskToggle(task.id);
+                        updateStreak(task.id, isCompleted); // Pass correct value
+                      }}
                       className="h-4 w-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
                     />
                     <div className="ml-3 flex-1">
@@ -214,6 +252,9 @@ function Dashboard() {
                             task.priority.slice(1)}{" "}
                           Priority
                         </span>
+                      </div>
+                      <div className="text-sm text-green-400">
+                        🔥 Streak: {task.streak}
                       </div>
                     </div>
                   </div>
