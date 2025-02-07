@@ -58,6 +58,9 @@ class Habit(BaseModel):
     reminder: bool = False
     streak: int = 0
 
+class StreakRequest(BaseModel):
+    user_id: int
+
 class UserSignup(BaseModel):
     username: str
     email: EmailStr
@@ -104,15 +107,13 @@ def delete_habit(habit_id: int):
     save_data(HABITS_FILE, updated_habits)
     return {"message": "Habit deleted successfully"}
 
-@app.patch("/habits/{habit_id}/streak")
-def update_streak(habit_id: int, completed: bool):
-    habits = load_data(HABITS_FILE)
-    for habit in habits:
-        if habit["id"] == habit_id:
-            habit["streak"] += 1 if completed else max(0, habit["streak"] - 1)
-            save_data(HABITS_FILE, habits)
-            return {"message": "Streak updated", "habit": habit}
-    raise HTTPException(status_code=404, detail="Habit not found")
+@app.post("/habits/update_streak")
+def update_streak(request: StreakRequest):
+    data = load_data(HABITS_FILE)
+    data[str(request.user_id)]["streak"] += 1
+    save_data(HABITS_FILE, data)
+    return data[str(request.user_id)]
+
 
 # User Endpoints
 @app.post("/register")
@@ -174,5 +175,6 @@ def recommend_habits(request: PromptRequest):
         raise HTTPException(status_code=500, detail=f"Error parsing response: {e}")
 
 
+
 if __name__ == "__main__":
-    uvicorn.run("master:app", host="0.0.0.0", port=8080, reload=True)
+    uvicorn.run("master:app", host="0.0.0.0", port=8080, reload=True, debug=True)
