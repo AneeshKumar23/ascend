@@ -8,6 +8,86 @@ from typing import Dict
 
 app = FastAPI()
 
+HABITS_FILE = "habits.json"
+
+# Ensure habits.json exists
+if not os.path.exists(HABITS_FILE):
+    with open(HABITS_FILE, "w") as file:
+        json.dump([], file)
+
+
+# Load habits from JSON file
+def load_habits():
+    try:
+        with open(HABITS_FILE, "r") as file:
+            return json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+
+# Save habits to JSON file
+def save_habits(habits):
+    with open(HABITS_FILE, "w") as file:
+        json.dump(habits, file, indent=4)
+
+
+# Habit Data Model
+class Habit(BaseModel):
+    title: str
+    time: str
+    priority: str
+    reminder: bool = False
+    streak: int = 0
+
+
+# Fetch All Habits
+@app.get("/habits")
+def get_habits():
+    return load_habits()
+
+
+# Add a New Habit
+@app.post("/habits")
+def add_habit(habit: Habit):
+    habits = load_habits()
+
+    new_habit = {
+        "id": len(habits) + 1,
+        **habit.dict(),
+    }
+
+    habits.append(new_habit)
+    save_habits(habits)
+
+    return {"message": "Habit added successfully", "habit": new_habit}
+
+
+# Update a Habit
+@app.put("/habits/{habit_id}")
+def update_habit(habit_id: int, habit: Habit):
+    habits = load_habits()
+
+    for h in habits:
+        if h["id"] == habit_id:
+            h.update(habit.dict())
+            save_habits(habits)
+            return {"message": "Habit updated successfully", "habit": h}
+
+    raise HTTPException(status_code=404, detail="Habit not found")
+
+
+# Delete a Habit
+@app.delete("/habits/{habit_id}")
+def delete_habit(habit_id: int):
+    habits = load_habits()
+    updated_habits = [h for h in habits if h["id"] != habit_id]
+
+    if len(updated_habits) == len(habits):
+        raise HTTPException(status_code=404, detail="Habit not found")
+
+    save_habits(updated_habits)
+    return {"message": "Habit deleted successfully"}
+
 # Allow CORS for frontend requests
 app.add_middleware(
     CORSMiddleware,

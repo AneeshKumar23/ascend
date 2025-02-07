@@ -22,29 +22,25 @@ function Navbar() {
           <NavLink
             icon={<Target size={24} />}
             text="Habits"
-            // to="/habits"
-            to="/dashboard"
+            to="/habits"
             active={isActive("/habits")}
           />
           <NavLink
             icon={<Calendar size={24} />}
             text="Goals"
-            // to="/goals"
-            to="/dashboard"
+            to="/goals"
             active={isActive("/goals")}
           />
           <NavLink
             icon={<Trophy size={24} />}
             text="Achievements"
-            // to="/achievements"
-            to="/dashboard"
+            to="/achievements"
             active={isActive("/achievements")}
           />
           <NavLink
             icon={<User size={24} />}
             text="Profile"
-            to="/dashboard"
-            // to="/profile"
+            to="/profile"
             active={isActive("/profile")}
           />
         </div>

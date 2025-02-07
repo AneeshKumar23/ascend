@@ -1,26 +1,26 @@
 {
-    "chatara1968@gmail.com": {
-        "id": "1",
-        "username": "CowTheGreat",
-        "email": "chatara1968@gmail.com",
-        "password": "123456",
-        "avatar": "https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?auto=format&fit=crop&w=150&h=150",
-        "dateJoined": "2025-02-07",
-        "preferences": {
-            "notifications": true,
-            "theme": "dark"
-        }
-    },
-    "cowara987@gmail.com": {
-        "id": "2",
-        "username": "SV_A_M",
-        "email": "cowara987@gmail.com",
-        "password": "123456",
-        "avatar": "https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?auto=format&fit=crop&w=150&h=150",
-        "dateJoined": "2025-02-07",
-        "preferences": {
-            "notifications": true,
-            "theme": "dark"
-        }
+  "chatara1968@gmail.com": {
+    "id": "1",
+    "username": "CowTheGreat",
+    "email": "chatara1968@gmail.com",
+    "password": "123456",
+    "avatar": "https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?auto=format&fit=crop&w=150&h=150",
+    "dateJoined": "2025-02-07",
+    "preferences": {
+      "notifications": true,
+      "theme": "dark"
     }
+  },
+  "cowara987@gmail.com": {
+    "id": "2",
+    "username": "SV_A_M",
+    "email": "cowara987@gmail.com",
+    "password": "123456",
+    "avatar": "https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?auto=format&fit=crop&w=150&h=150",
+    "dateJoined": "2025-02-07",
+    "preferences": {
+      "notifications": true,
+      "theme": "dark"
+    }
+  }
 }
