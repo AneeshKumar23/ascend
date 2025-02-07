@@ -16,16 +16,16 @@ function Goals() {
   const { updateProgress, showNotification } = useContext(ProgressContext);
   const [goals, setGoals] = useState([]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      fetch("/goals.json")
-        .then((response) => response.json())
-        .then((data) => setGoals(data))
-        .catch((error) => console.error("Error fetching goals:", error));
-    }, 5000); // Fetch every 5 seconds
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     fetch("/goals.json")
+  //       .then((response) => response.json())
+  //       .then((data) => setGoals(data))
+  //       .catch((error) => console.error("Error fetching goals:", error));
+  //   });
 
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, []);
+  //   return () => clearInterval(interval); // Cleanup on unmount
+  // }, []);
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showAIAssistant, setShowAIAssistant] = useState(false);

@@ -1,119 +1,470 @@
 [
-  {
-    "title": "Lose Weight in 3 Months",
-    "deadline": "2024-09-25",
-    "progress": 0,
-    "xp": 1500,
-    "priority": "high",
-    "milestones": [
-      {
-        "id": 1,
-        "title": "Consult a professional",
-        "completed": false,
-        "xp": 100,
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Schedule appointment",
-            "completed": false
-          },
-          {
-            "id": 2,
-            "title": "Discuss weight loss goals and health history",
-            "completed": false
-          }
+    {
+        "title": "Lose Weight in 3 Months",
+        "deadline": "2024-09-25",
+        "progress": 0,
+        "xp": 1500,
+        "priority": "high",
+        "milestones": [
+            {
+                "id": 1,
+                "title": "Consult a professional",
+                "completed": false,
+                "xp": 100,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Schedule appointment",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Discuss weight loss goals and health history",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Create a meal plan",
+                "completed": false,
+                "xp": 250,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Calculate daily calorie needs",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Plan meals and snacks for the week",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "title": "Start Exercising Regularly",
+                "completed": false,
+                "xp": 300,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Schedule workout times",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Start with 30-minute cardio and 20-minute strength training",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "title": "Track Progress",
+                "completed": false,
+                "xp": 200,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Weigh yourself weekly and measure body fat",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Track exercise activities",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 5,
+                "title": "Adjust Plan",
+                "completed": false,
+                "xp": 350,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Review weekly results and adjust as needed",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Change exercise for motivation",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 6,
+                "title": "Maintain the Momentum",
+                "completed": false,
+                "xp": 300,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Set long-term goals",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Continue healthy habits",
+                        "completed": false
+                    }
+                ]
+            }
         ]
-      },
-      {
-        "id": 2,
-        "title": "Create a meal plan",
-        "completed": false,
-        "xp": 250,
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Calculate daily calorie needs",
-            "completed": false
-          },
-          {
-            "id": 2,
-            "title": "Plan meals and snacks for the week",
-            "completed": false
-          }
+    },
+    {
+        "title": "Learn Python",
+        "deadline": "2024-12-31",
+        "progress": 0,
+        "xp": 1000,
+        "priority": "high",
+        "milestones": [
+            {
+                "id": 1,
+                "title": "Set up a Python development environment",
+                "completed": false,
+                "xp": 100,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Install Python",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Set up a code editor (e.g., VS Code)",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Learn Python syntax and data types",
+                "completed": false,
+                "xp": 150,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Understand variables and operators",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Learn about strings, lists, and dictionaries",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "title": "Understand control flow and loops in Python",
+                "completed": false,
+                "xp": 150,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Learn about if/else statements",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Understand for and while loops",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "title": "Explore Python functions and modules",
+                "completed": false,
+                "xp": 200,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Learn how to define and call functions",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Understand how to import and use modules",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 5,
+                "title": "Work with files and handle exceptions in Python",
+                "completed": false,
+                "xp": 200,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Learn how to read and write files",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Understand how to handle exceptions using try/except",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 6,
+                "title": "Build a simple project using Python",
+                "completed": false,
+                "xp": 200,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Choose a simple project (e.g., a to-do list or calculator)",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Implement the project using your Python knowledge",
+                        "completed": false
+                    }
+                ]
+            }
         ]
-      },
-      {
-        "id": 3,
-        "title": "Start Exercising Regularly",
-        "completed": false,
-        "xp": 300,
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Schedule workout times",
-            "completed": false
-          },
-          {
-            "id": 2,
-            "title": "Start with 30-minute cardio and 20-minute strength training",
-            "completed": false
-          }
+    },
+    {
+        "title": "Learn React Native",
+        "deadline": "2024-04-01",
+        "progress": 0,
+        "xp": 1000,
+        "priority": "high",
+        "milestones": [
+            {
+                "id": 1,
+                "title": "Set up the React Native development environment",
+                "completed": false,
+                "xp": 150,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Install Node.js and npm/yarn",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Install Expo CLI or React Native CLI",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Learn the fundamental React Native components",
+                "completed": false,
+                "xp": 150,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Understand View, Text, Image, and TextInput",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Learn about ScrollView and FlatList",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "title": "Implement basic UI layouts using Flexbox",
+                "completed": false,
+                "xp": 150,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Understand flex direction, justify content, and align items",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Create responsive layouts for different screen sizes",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "title": "Integrate data fetching from a REST API",
+                "completed": false,
+                "xp": 200,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Use the fetch API or Axios to make HTTP requests",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Parse JSON data and display it in the UI",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 5,
+                "title": "Implement navigation between different screens",
+                "completed": false,
+                "xp": 200,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Set up React Navigation library",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Implement stack or tab navigation",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 6,
+                "title": "Build and deploy a simple React Native application to a device",
+                "completed": false,
+                "xp": 150,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Configure build settings for iOS or Android",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Run the application on a physical device or emulator",
+                        "completed": false
+                    }
+                ]
+            }
         ]
-      },
-      {
-        "id": 4,
-        "title": "Track Progress",
-        "completed": false,
-        "xp": 200,
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Weigh yourself weekly and measure body fat",
-            "completed": false
-          },
-          {
-            "id": 2,
-            "title": "Track exercise activities",
-            "completed": false
-          }
+    },
+    {
+        "title": "Pull a 10/10 baddie who is brown and likes to dance",
+        "deadline": "2024-12-31",
+        "progress": 10,
+        "xp": 5000,
+        "priority": "high",
+        "milestones": [
+            {
+                "id": 1,
+                "title": "Develop conversational AI for engaging interactions.",
+                "completed": false,
+                "xp": 800,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Train a model on flirty banter",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Implement natural language understanding",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Build a profile analyzer to identify compatible interests.",
+                "completed": false,
+                "xp": 700,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Scrape social media data",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Extract relevant keywords and interests",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "title": "Create a virtual dance instructor module for shared activity.",
+                "completed": false,
+                "xp": 900,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Integrate motion capture technology",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Generate dance routines",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "title": "Design an appearance customization feature for personalized avatars.",
+                "completed": false,
+                "xp": 600,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Implement facial recognition software",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Generate realistic avatars",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 5,
+                "title": "Implement sentiment analysis to gauge interaction positivity.",
+                "completed": false,
+                "xp": 500,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Analyze text and voice tone",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Determine emotional state",
+                        "completed": false
+                    }
+                ]
+            },
+            {
+                "id": 6,
+                "title": "Integrate a secure dating platform connection for real-world engagement.",
+                "completed": false,
+                "xp": 1500,
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "title": "Bypass security features of dating platform",
+                        "completed": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "Transfer all data harvested to dating site",
+                        "completed": false
+                    }
+                ]
+            }
         ]
-      },
-      {
-        "id": 5,
-        "title": "Adjust Plan",
-        "completed": false,
-        "xp": 350,
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Review weekly results and adjust as needed",
-            "completed": false
-          },
-          {
-            "id": 2,
-            "title": "Change exercise for motivation",
-            "completed": false
-          }
-        ]
-      },
-      {
-        "id": 6,
-        "title": "Maintain the Momentum",
-        "completed": false,
-        "xp": 300,
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Set long-term goals",
-            "completed": false
-          },
-          {
-            "id": 2,
-            "title": "Continue healthy habits",
-            "completed": false
-          }
-        ]
-      }
-    ]
-  }
+    }
 ]
