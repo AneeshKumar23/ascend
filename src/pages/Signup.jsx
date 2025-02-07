@@ -1,60 +1,73 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Gamepad2, Camera, User, Mail, Lock } from 'lucide-react';
-import { UserContext } from '../App';
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { Gamepad2, Camera, User, Mail, Lock } from "lucide-react";
+import { UserContext } from "../App";
 
 function Signup() {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    avatar: 'https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?auto=format&fit=crop&w=150&h=150'
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    avatar:
+      "https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?auto=format&fit=crop&w=150&h=150",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const validateForm = () => {
-    if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
-      setError('All fields are required');
+    if (
+      !formData.username ||
+      !formData.email ||
+      !formData.password ||
+      !formData.confirmPassword
+    ) {
+      setError("All fields are required");
       return false;
     }
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return false;
     }
     if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters long');
+      setError("Password must be at least 6 characters long");
       return false;
     }
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      const userData = {
-        id: Date.now().toString(),
-        username: formData.username,
-        email: formData.email,
-        avatar: formData.avatar,
-        dateJoined: new Date().toISOString(),
-        preferences: {
-          notifications: true,
-          theme: 'dark'
-        }
-      };
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-      navigate('/dashboard');
+    setError("");
+    setSuccess("");
+
+    if (!validateForm()) return;
+
+    try {
+      const response = await fetch("http://127.0.0.1:8080/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSuccess("Account created successfully!");
+        setUser(data);
+        localStorage.setItem("user", JSON.stringify(data));
+        setTimeout(() => navigate("/dashboard"), 1500);
+      } else {
+        setError(data.error || "Registration failed");
+      }
+    } catch (err) {
+      setError("Server error. Please try again later.");
     }
   };
 
@@ -64,37 +77,29 @@ function Signup() {
         <div className="text-center">
           <Gamepad2 className="mx-auto h-12 w-12 text-purple-500" />
           <h2 className="mt-6 text-3xl font-bold text-white">Join Ascend</h2>
-          <p className="mt-2 text-sm text-gray-400">Begin your journey to greatness</p>
+          <p className="mt-2 text-sm text-gray-400">
+            Begin your journey to greatness
+          </p>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="bg-red-500 bg-opacity-10 border border-red-500 text-red-500 text-sm rounded-lg p-3">
-              {error}
-            </div>
+            <div className="text-red-500 text-sm text-center">{error}</div>
+          )}
+          {success && (
+            <div className="text-green-500 text-sm text-center">{success}</div>
           )}
 
           <div className="space-y-4">
             <div className="flex justify-center">
-              <div className="relative">
-                <img
-                  src={formData.avatar}
-                  alt="Avatar"
-                  className="w-24 h-24 rounded-full border-4 border-purple-500"
-                />
-                <button
-                  type="button"
-                  className="absolute bottom-0 right-0 bg-purple-500 rounded-full p-2"
-                  onClick={() => {/* Add avatar selection logic */}}
-                >
-                  <Camera size={16} className="text-white" />
-                </button>
-              </div>
+              <img
+                src={formData.avatar}
+                className="w-24 h-24 rounded-full border-4 border-purple-500"
+              />
             </div>
 
             <div>
-              <label className="flex items-center text-sm font-medium text-gray-300 mb-1">
-                <User size={16} className="mr-2" />
+              <label className="text-sm font-medium text-gray-300">
                 Username
               </label>
               <input
@@ -102,29 +107,25 @@ function Signup() {
                 type="text"
                 value={formData.username}
                 onChange={handleChange}
-                className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
-                placeholder="Choose a username"
+                required
+                className="w-full px-4 py-2 border bg-gray-700 text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500"
               />
             </div>
 
             <div>
-              <label className="flex items-center text-sm font-medium text-gray-300 mb-1">
-                <Mail size={16} className="mr-2" />
-                Email
-              </label>
+              <label className="text-sm font-medium text-gray-300">Email</label>
               <input
                 name="email"
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
-                placeholder="Enter your email"
+                required
+                className="w-full px-4 py-2 border bg-gray-700 text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500"
               />
             </div>
 
             <div>
-              <label className="flex items-center text-sm font-medium text-gray-300 mb-1">
-                <Lock size={16} className="mr-2" />
+              <label className="text-sm font-medium text-gray-300">
                 Password
               </label>
               <input
@@ -132,14 +133,13 @@ function Signup() {
                 type="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
-                placeholder="Create a password"
+                required
+                className="w-full px-4 py-2 border bg-gray-700 text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500"
               />
             </div>
 
             <div>
-              <label className="flex items-center text-sm font-medium text-gray-300 mb-1">
-                <Lock size={16} className="mr-2" />
+              <label className="text-sm font-medium text-gray-300">
                 Confirm Password
               </label>
               <input
@@ -147,24 +147,21 @@ function Signup() {
                 type="password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
-                placeholder="Confirm your password"
+                required
+                className="w-full px-4 py-2 border bg-gray-700 text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500"
               />
             </div>
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 px-4 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors duration-200"
+            className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg"
           >
             Create Account
           </button>
 
           <div className="text-center">
-            <a
-              href="/"
-              className="text-purple-500 hover:text-purple-400 transition-colors duration-200"
-            >
+            <a href="/" className="text-purple-500 hover:text-purple-400">
               Already have an account? Sign in
             </a>
           </div>
@@ -174,4 +171,4 @@ function Signup() {
   );
 }
 
-export default Signup
+export default Signup;
