@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
-
+import React, { useContext, useState } from "react";
 import {
   Target,
   Trophy,
@@ -12,7 +11,9 @@ import {
   Shield,
   Coins,
   MoreHorizontal,
+  MessageCircle, // Add this line
 } from "lucide-react";
+
 import { UserContext } from "../App";
 import { useProgress } from "../context/ProgressContext";
 import Leaderboard from "../components/Leaderboard";
@@ -37,13 +38,23 @@ function Dashboard() {
     type: "",
     xp: 0,
   });
-  const [tasks, setTasks] = useState([]);
-  useEffect(() => {
-    fetch("/habits.json")
-      .then((response) => response.json())
-      .then((data) => setTasks(data))
-      .catch((error) => console.error("Error fetching habits:", error));
-  }, []);
+  const [tasks, setTasks] = useState([
+    {
+      id: 1,
+      title: "Morning Meditation",
+      completed: false,
+      xp: 50,
+      priority: "high",
+    },
+    {
+      id: 2,
+      title: "Read 30 minutes",
+      completed: false,
+      xp: 30,
+      priority: "medium",
+    },
+    { id: 3, title: "Workout", completed: false, xp: 40, priority: "high" },
+  ]);
 
   const level = Math.floor(progress.xp / 1000) + 1;
   const currentLevelXP = progress.xp % 1000;
@@ -228,71 +239,84 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* More Menu Button */}
-        <div className="fixed bottom-24 right-4">
-          <button
-            onClick={() => setShowMoreMenu(!showMoreMenu)}
-            className="bg-purple-600 text-white p-4 rounded-full shadow-lg hover:bg-purple-700 transition-colors duration-200"
-          >
-            <MoreHorizontal size={24} />
-          </button>
-
-          {/* Floating Action Menu */}
-          {showMoreMenu && (
-            <div className="absolute bottom-16 right-0 bg-gray-800/90 backdrop-blur-sm rounded-2xl p-2 shadow-lg">
-              <div className="space-y-3">
-                <button
-                  onClick={() => {
-                    setShowDailyRewards(true);
-                    setShowMoreMenu(false);
-                  }}
-                  className="w-12 h-12 bg-yellow-600 text-white rounded-xl shadow-lg hover:bg-yellow-700 transition-colors duration-200 flex items-center justify-center group relative"
-                >
-                  <Gift size={24} />
-                  <span className="absolute right-full mr-2 bg-gray-800 text-white px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                    Daily Rewards
-                  </span>
-                </button>
-                <button
-                  onClick={() => {
-                    setShowFocusTimer(true);
-                    setShowMoreMenu(false);
-                  }}
-                  className="w-12 h-12 bg-green-600 text-white rounded-xl shadow-lg hover:bg-green-700 transition-colors duration-200 flex items-center justify-center group relative"
-                >
-                  <Timer size={24} />
-                  <span className="absolute right-full mr-2 bg-gray-800 text-white px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                    Focus Timer
-                  </span>
-                </button>
-                <button
-                  onClick={() => {
-                    setShowLeaderboard(true);
-                    setShowMoreMenu(false);
-                  }}
-                  className="w-12 h-12 bg-purple-600 text-white rounded-xl shadow-lg hover:bg-purple-700 transition-colors duration-200 flex items-center justify-center group relative"
-                >
-                  <Trophy size={24} />
-                  <span className="absolute right-full mr-2 bg-gray-800 text-white px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                    Leaderboard
-                  </span>
-                </button>
-                <button
-                  onClick={() => {
-                    setShowFriends(true);
-                    setShowMoreMenu(false);
-                  }}
-                  className="w-12 h-12 bg-purple-600 text-white rounded-xl shadow-lg hover:bg-purple-700 transition-colors duration-200 flex items-center justify-center group relative"
-                >
-                  <Users size={24} />
-                  <span className="absolute right-full mr-2 bg-gray-800 text-white px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                    Friends
-                  </span>
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
+{/* More Menu Button */}
+<div className="fixed bottom-24 right-4">
+  <button
+    onClick={() => setShowMoreMenu(!showMoreMenu)}
+    className="bg-purple-600 text-white p-4 rounded-full shadow-lg hover:bg-purple-700 transition-colors duration-200"
+  >
+    <MoreHorizontal size={24} />
+  </button>
+  {/* Floating Action Menu */}
+  {showMoreMenu && (
+    <div className="absolute bottom-16 right-0 bg-gray-800/90 backdrop-blur-sm rounded-2xl p-2 shadow-lg">
+      <div className="space-y-3">
+        {/* Daily Rewards Button */}
+        <button
+          onClick={() => {
+            setShowDailyRewards(true);
+            setShowMoreMenu(false);
+          }}
+          className="w-12 h-12 bg-yellow-600 text-white rounded-xl shadow-lg hover:bg-yellow-700 transition-colors duration-200 flex items-center justify-center group relative"
+        >
+          <Gift size={24} />
+          <span className="absolute right-full mr-2 bg-gray-800 text-white px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+            Daily Rewards
+          </span>
+        </button>
+        {/* Focus Timer Button */}
+        <button
+          onClick={() => {
+            setShowFocusTimer(true);
+            setShowMoreMenu(false);
+          }}
+          className="w-12 h-12 bg-green-600 text-white rounded-xl shadow-lg hover:bg-green-700 transition-colors duration-200 flex items-center justify-center group relative"
+        >
+          <Timer size={24} />
+          <span className="absolute right-full mr-2 bg-gray-800 text-white px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+            Focus Timer
+          </span>
+        </button>
+        {/* Leaderboard Button */}
+        <button
+          onClick={() => {
+            setShowLeaderboard(true);
+            setShowMoreMenu(false);
+          }}
+          className="w-12 h-12 bg-purple-600 text-white rounded-xl shadow-lg hover:bg-purple-700 transition-colors duration-200 flex items-center justify-center group relative"
+        >
+          <Trophy size={24} />
+          <span className="absolute right-full mr-2 bg-gray-800 text-white px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+            Leaderboard
+          </span>
+        </button>
+        {/* Friends Button */}
+        <button
+          onClick={() => {
+            setShowFriends(true);
+            setShowMoreMenu(false);
+          }}
+          className="w-12 h-12 bg-purple-600 text-white rounded-xl shadow-lg hover:bg-purple-700 transition-colors duration-200 flex items-center justify-center group relative"
+        >
+          <Users size={24} />
+          <span className="absolute right-full mr-2 bg-gray-800 text-white px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+            Friends
+          </span>
+        </button>
+        {/* Discord Button */}
+        <button
+        onClick={() => window.open("https://discord.gg/WSbJErZa3Z", "_blank")}
+        className="w-12 h-12 bg-indigo-600 text-white rounded-xl shadow-lg hover:bg-indigo-700 transition-colors duration-200 flex items-center justify-center group relative"
+      >
+        <MessageCircle size={24} /> {/* Use the valid icon */}
+        <span className="absolute right-full mr-2 bg-gray-800 text-white px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+          Join Discord
+        </span>
+      </button>
+    </div>
+    </div>
+  )}
+</div>
 
         {/* Modals */}
         {showLeaderboard && (
