@@ -17,10 +17,14 @@ function Goals() {
   const [goals, setGoals] = useState([]);
 
   useEffect(() => {
-    fetch("/goals.json")
-      .then((response) => response.json())
-      .then((data) => setGoals(data))
-      .catch((error) => console.error("Error fetching goals:", error));
+    const interval = setInterval(() => {
+      fetch("/goals.json")
+        .then((response) => response.json())
+        .then((data) => setGoals(data))
+        .catch((error) => console.error("Error fetching goals:", error));
+    }, 5000); // Fetch every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
   }, []);
 
   const [showAddModal, setShowAddModal] = useState(false);

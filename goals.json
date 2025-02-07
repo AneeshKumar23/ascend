@@ -1,115 +1,115 @@
 [
   {
-    "title": "Lose Weight",
-    "deadline": "2024-12-31",
+    "title": "Lose Weight in 3 Months",
+    "deadline": "2024-09-25",
     "progress": 0,
     "xp": 1500,
     "priority": "high",
     "milestones": [
       {
         "id": 1,
-        "title": "Establish a Calorie Deficit",
+        "title": "Consult a professional",
         "completed": false,
-        "xp": 250,
+        "xp": 100,
         "subtasks": [
           {
             "id": 1,
-            "title": "Calculate your daily calorie needs.",
+            "title": "Schedule appointment",
             "completed": false
           },
           {
             "id": 2,
-            "title": "Reduce calorie intake by 500-750 calories per day.",
+            "title": "Discuss weight loss goals and health history",
             "completed": false
           }
         ]
       },
       {
         "id": 2,
-        "title": "Incorporate Regular Exercise",
+        "title": "Create a meal plan",
         "completed": false,
         "xp": 250,
         "subtasks": [
           {
             "id": 1,
-            "title": "Engage in at least 150 minutes of moderate-intensity or 75 minutes of vigorous-intensity aerobic exercise per week.",
+            "title": "Calculate daily calorie needs",
             "completed": false
           },
           {
             "id": 2,
-            "title": "Include strength training exercises at least two days per week.",
+            "title": "Plan meals and snacks for the week",
             "completed": false
           }
         ]
       },
       {
         "id": 3,
-        "title": "Optimize Macronutrient Intake",
+        "title": "Start Exercising Regularly",
         "completed": false,
-        "xp": 250,
+        "xp": 300,
         "subtasks": [
           {
             "id": 1,
-            "title": "Consume adequate protein to preserve muscle mass.",
+            "title": "Schedule workout times",
             "completed": false
           },
           {
             "id": 2,
-            "title": "Prioritize complex carbohydrates and healthy fats.",
+            "title": "Start with 30-minute cardio and 20-minute strength training",
             "completed": false
           }
         ]
       },
       {
         "id": 4,
-        "title": "Prioritize Sleep and Stress Management",
+        "title": "Track Progress",
         "completed": false,
-        "xp": 250,
+        "xp": 200,
         "subtasks": [
           {
             "id": 1,
-            "title": "Aim for 7-9 hours of quality sleep per night.",
+            "title": "Weigh yourself weekly and measure body fat",
             "completed": false
           },
           {
             "id": 2,
-            "title": "Practice stress-reducing techniques such as meditation or yoga.",
+            "title": "Track exercise activities",
             "completed": false
           }
         ]
       },
       {
         "id": 5,
-        "title": "Track Progress and Adjust Strategy",
+        "title": "Adjust Plan",
         "completed": false,
-        "xp": 250,
+        "xp": 350,
         "subtasks": [
           {
             "id": 1,
-            "title": "Monitor weight, measurements, and body composition regularly.",
+            "title": "Review weekly results and adjust as needed",
             "completed": false
           },
           {
             "id": 2,
-            "title": "Adjust diet and exercise plan based on progress and individual needs.",
+            "title": "Change exercise for motivation",
             "completed": false
           }
         ]
       },
       {
         "id": 6,
-        "title": "Maintain Consistency and Seek Support",
+        "title": "Maintain the Momentum",
         "completed": false,
-        "xp": 250,
+        "xp": 300,
         "subtasks": [
           {
             "id": 1,
-            "title": "Develop sustainable habits for long-term weight management.",
+            "title": "Set long-term goals",
             "completed": false
           },
           {
             "id": 2,
-            "title": "Seek support from friends, family, or a registered dietitian.",
+            "title": "Continue healthy habits",
             "completed": false
           }
         ]
