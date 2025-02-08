@@ -12,6 +12,28 @@
   },
   {
     "id": 2,
+    "title": "Night Owl",
+    "description": "Stay productive at night for 7 days",
+    "progress": 0,
+    "completed": false,
+    "icon": "🌙",
+    "xpReward": 150,
+    "requirement": 7,
+    "category": "routine"
+  },
+  {
+    "id": 3,
+    "title": "Consistency King",
+    "description": "Follow a set daily schedule for 30 days",
+    "progress": 0,
+    "completed": false,
+    "icon": "📆",
+    "xpReward": 300,
+    "requirement": 30,
+    "category": "routine"
+  },
+  {
+    "id": 4,
     "title": "Bookworm",
     "description": "Read for 30 minutes every day for 14 days",
     "progress": 0,
@@ -22,7 +44,29 @@
     "category": "reading"
   },
   {
-    "id": 3,
+    "id": 5,
+    "title": "Page Turner",
+    "description": "Read 5 books in a month",
+    "progress": 0,
+    "completed": false,
+    "icon": "📖",
+    "xpReward": 500,
+    "requirement": 5,
+    "category": "reading"
+  },
+  {
+    "id": 6,
+    "title": "Literary Master",
+    "description": "Read for 100 hours total",
+    "progress": 0,
+    "completed": false,
+    "icon": "📜",
+    "xpReward": 1000,
+    "requirement": 100,
+    "category": "reading"
+  },
+  {
+    "id": 7,
     "title": "Fitness Fanatic",
     "description": "Exercise 20 times in a month",
     "progress": 0,
@@ -33,7 +77,7 @@
     "category": "fitness"
   },
   {
-    "id": 4,
+    "id": 8,
     "title": "Advanced Fitness",
     "description": "Exercise 40 times in 2 months",
     "progress": 0,
@@ -44,14 +88,146 @@
     "category": "fitness"
   },
   {
-    "id": 5,
-    "title": "Night Owl",
-    "description": "Stay productive at night for 7 days",
+    "id": 9,
+    "title": "Ultimate Athlete",
+    "description": "Exercise for 100 days straight",
     "progress": 0,
     "completed": false,
-    "icon": "🌙",
-    "xpReward": 150,
+    "icon": "🏅",
+    "xpReward": 1000,
+    "requirement": 100,
+    "category": "fitness"
+  },
+  {
+    "id": 10,
+    "title": "Mindful Master",
+    "description": "Meditate for 10 minutes every day for 15 days",
+    "progress": 0,
+    "completed": false,
+    "icon": "🧘",
+    "xpReward": 200,
+    "requirement": 15,
+    "category": "mindfulness"
+  },
+  {
+    "id": 11,
+    "title": "Zen Mode",
+    "description": "Meditate for 100 hours total",
+    "progress": 0,
+    "completed": false,
+    "icon": "☯️",
+    "xpReward": 700,
+    "requirement": 100,
+    "category": "mindfulness"
+  },
+  {
+    "id": 12,
+    "title": "Peace Seeker",
+    "description": "Do yoga every morning for 30 days",
+    "progress": 0,
+    "completed": false,
+    "icon": "🧘‍♂️",
+    "xpReward": 500,
+    "requirement": 30,
+    "category": "mindfulness"
+  },
+  {
+    "id": 13,
+    "title": "Tech Timeout",
+    "description": "Reduce screen time for 14 days",
+    "progress": 0,
+    "completed": false,
+    "icon": "📵",
+    "xpReward": 400,
+    "requirement": 14,
+    "category": "digital_wellbeing"
+  },
+  {
+    "id": 14,
+    "title": "Social Detox",
+    "description": "Take a break from social media for a week",
+    "progress": 0,
+    "completed": false,
+    "icon": "🚫📱",
+    "xpReward": 300,
     "requirement": 7,
-    "category": "routine"
+    "category": "digital_wellbeing"
+  },
+  {
+    "id": 15,
+    "title": "Sleep Optimizer",
+    "description": "Maintain a proper sleep schedule for 21 days",
+    "progress": 0,
+    "completed": false,
+    "icon": "😴",
+    "xpReward": 500,
+    "requirement": 21,
+    "category": "digital_wellbeing"
+  },
+  {
+    "id": 16,
+    "title": "Savings Starter",
+    "description": "Save money for 10 consecutive weeks",
+    "progress": 0,
+    "completed": false,
+    "icon": "💰",
+    "xpReward": 300,
+    "requirement": 10,
+    "category": "finance"
+  },
+  {
+    "id": 17,
+    "title": "Investor Mindset",
+    "description": "Track expenses for 30 days",
+    "progress": 0,
+    "completed": false,
+    "icon": "📊",
+    "xpReward": 500,
+    "requirement": 30,
+    "category": "finance"
+  },
+  {
+    "id": 18,
+    "title": "Financial Guru",
+    "description": "Save $1000 in a year",
+    "progress": 0,
+    "completed": false,
+    "icon": "💵",
+    "xpReward": 1000,
+    "requirement": 1000,
+    "category": "finance"
+  },
+  {
+    "id": 19,
+    "title": "Healthy Eating",
+    "description": "Eat homemade food for 30 days",
+    "progress": 0,
+    "completed": false,
+    "icon": "🥗",
+    "xpReward": 400,
+    "requirement": 30,
+    "category": "nutrition"
+  },
+  {
+    "id": 20,
+    "title": "No Sugar Challenge",
+    "description": "Avoid sugar for 15 days",
+    "progress": 0,
+    "completed": false,
+    "icon": "🚫🍬",
+    "xpReward": 300,
+    "requirement": 15,
+    "category": "nutrition"
+  },
+  {
+    "id": 21,
+    "title": "Hydration Hero",
+    "description": "Drink 2L of water daily for 30 days",
+    "progress": 0,
+    "completed": false,
+    "icon": "💧",
+    "xpReward": 500,
+    "requirement": 30,
+    "category": "nutrition"
   }
 ]

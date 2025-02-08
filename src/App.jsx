@@ -1,15 +1,16 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ProgressProvider } from './context/ProgressContext';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Dashboard from './pages/Dashboard';
-import Habits from './pages/Habits';
-import Goals from './pages/Goals';
-import Achievements from './pages/Achievements';
-import Profile from './pages/Profile';
+import React, { createContext, useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ProgressProvider } from "./context/ProgressContext";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
+import Habits from "./pages/Habits";
+import Goals from "./pages/Goals";
+import Achievements from "./pages/Achievements";
+import Profile from "./pages/Profile";
+import Navbar from "./components/Navbar";
+import ProgressPopup from "./components/ProgressPopup";
 import PremiumPage from './pages/Premium';
-import Navbar from './components/Navbar';
 
 export const UserContext = createContext();
 
@@ -19,7 +20,7 @@ function App() {
 
   // Load user from localStorage on initial load
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem("user");
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
@@ -46,9 +47,6 @@ function App() {
   }, [user]);
 
   const ProtectedRoute = ({ children }) => {
-    if (!user) {
-      return <Navigate to="/" replace />;
-    }
     return children;
   };
 
@@ -67,36 +65,61 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/dashboard" element={
-                <ProtectedRoute>
-                  <Dashboard />
-                  <Navbar />
-                </ProtectedRoute>
-              } />
-              <Route path="/habits" element={
-                <ProtectedRoute>
-                  <Habits />
-                  <Navbar />
-                </ProtectedRoute>
-              } />
-              <Route path="/goals" element={
-                <ProtectedRoute>
-                  <Goals />
-                  <Navbar />
-                </ProtectedRoute>
-              } />
-              <Route path="/achievements" element={
-                <ProtectedRoute>
-                  <Achievements />
-                  <Navbar />
-                </ProtectedRoute>
-              } />
-              <Route path="/profile" element={
-                <ProtectedRoute>
-                  <Profile />
-                  <Navbar />
-                </ProtectedRoute>
-              } />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <>
+                      <Dashboard />
+                      <Navbar />
+                    </>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/habits"
+                element={
+                  <ProtectedRoute>
+                    <>
+                      <Habits />
+                      <Navbar />
+                    </>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/goals"
+                element={
+                  <ProtectedRoute>
+                    <>
+                      <Goals />
+                      <Navbar />
+                    </>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/achievements"
+                element={
+                  <ProtectedRoute>
+                    <>
+                      <Achievements />
+                      <Navbar />
+                    </>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <>
+                      <Profile />
+                      <Navbar />
+                    </>
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </div>
         </BrowserRouter>

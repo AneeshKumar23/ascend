@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { Bot, Send, X } from 'lucide-react';
+import React, { useState } from "react";
+import { Bot, Send, X } from "lucide-react";
 
 function AIGoalAssistant({ onSelectGoal, onClose }) {
   const [messages, setMessages] = useState([
     {
-      type: 'bot',
-      content: "hello! I'm your Goal Assistant. I can help you set meaningful goals. What area would you like to focus on? (e.g., Health, Career, Learning, Personal)",
+      type: "bot",
+      content:
+        "hello! I'm your Goal Assistant. I can help you set meaningful goals. What area would you like to focus on? (e.g., Health, Career, Learning, Personal)",
     },
   ]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [isThinking, setIsThinking] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
 
@@ -17,62 +18,115 @@ function AIGoalAssistant({ onSelectGoal, onClose }) {
     onSelectGoal(suggestion);
   };
 
+  // const simulateAIResponse = async (userMessage) => {
+  //   setIsThinking(true);
+  //   // Simulate AI thinking time
+  //   await new Promise(resolve => setTimeout(resolve, 1000));
+
+  //   let response;
+  //   if (userMessage.toLowerCase().includes('health')) {
+  //     response = {
+  //       type: 'bot',
+  //       content: "Here's a suggested health goal:\n\nRun 5K in Under 30 Minutes\n\nMilestones:\n1. Run 1K without stopping\n2. Run 2K under 15 minutes\n3. Run 3K under 20 minutes\n4. Run 4K under 25 minutes\n5. Achieve 5K under 30 minutes\n\nWould you like to use this goal?",
+  //       suggestion: {
+  //         title: "Run 5K in Under 30 Minutes",
+  //         deadline: "2024-06-01",
+  //         milestones: [
+  //           "Run 1K without stopping",
+  //           "Run 2K under 15 minutes",
+  //           "Run 3K under 20 minutes",
+  //           "Run 4K under 25 minutes",
+  //           "Achieve 5K under 30 minutes"
+  //         ]
+  //       }
+  //     };
+  //   } else if (userMessage.toLowerCase().includes('career')) {
+  //     response = {
+  //       type: 'bot',
+  //       content: "Here's a suggested career goal:\n\nMaster a New Programming Language\n\nMilestones:\n1. Complete basic syntax course\n2. Build a small project\n3. Complete advanced concepts\n4. Build a complex application\n5. Contribute to an open source project\n\nWould you like to use this goal?",
+  //       suggestion: {
+  //         title: "Master a New Programming Language",
+  //         deadline: "2024-08-01",
+  //         milestones: [
+  //           "Complete basic syntax course",
+  //           "Build a small project",
+  //           "Complete advanced concepts",
+  //           "Build a complex application",
+  //           "Contribute to an open source project"
+  //         ]
+  //       }
+  //     };
+  //   } else {
+  //     response = {
+  //       type: 'bot',
+  //       content: "Could you tell me more specifically what kind of goal you're interested in? For example: health, career, learning, or personal development?"
+  //     };
+  //   }
+
+  //   setMessages(prev => [...prev, { type: 'user', content: userMessage }, response]);
+  //   setIsThinking(false);
+  //   return response;
+  // };
+
   const simulateAIResponse = async (userMessage) => {
     setIsThinking(true);
-    // Simulate AI thinking time
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    let response;
-    if (userMessage.toLowerCase().includes('health')) {
-      response = {
-        type: 'bot',
-        content: "Here's a suggested health goal:\n\nRun 5K in Under 30 Minutes\n\nMilestones:\n1. Run 1K without stopping\n2. Run 2K under 15 minutes\n3. Run 3K under 20 minutes\n4. Run 4K under 25 minutes\n5. Achieve 5K under 30 minutes\n\nWould you like to use this goal?",
+
+    try {
+      const response = await fetch("http://localhost:8080/recommend_habits", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt: userMessage }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to get response from AI");
+      }
+
+      const data = await response.json();
+
+      const formattedResponse = {
+        type: "bot",
+        content: data.content, // The AI-generated response text
         suggestion: {
-          title: "Run 5K in Under 30 Minutes",
-          deadline: "2024-06-01",
-          milestones: [
-            "Run 1K without stopping",
-            "Run 2K under 15 minutes",
-            "Run 3K under 20 minutes",
-            "Run 4K under 25 minutes",
-            "Achieve 5K under 30 minutes"
-          ]
-        }
+          title: data.suggestion.title,
+          deadline: data.suggestion.deadline,
+          milestones: Object.keys(data.suggestion.milestones),
+        },
       };
-    } else if (userMessage.toLowerCase().includes('career')) {
-      response = {
-        type: 'bot',
-        content: "Here's a suggested career goal:\n\nMaster a New Programming Language\n\nMilestones:\n1. Complete basic syntax course\n2. Build a small project\n3. Complete advanced concepts\n4. Build a complex application\n5. Contribute to an open source project\n\nWould you like to use this goal?",
-        suggestion: {
-          title: "Master a New Programming Language",
-          deadline: "2024-08-01",
-          milestones: [
-            "Complete basic syntax course",
-            "Build a small project",
-            "Complete advanced concepts",
-            "Build a complex application",
-            "Contribute to an open source project"
-          ]
-        }
-      };
-    } else {
-      response = {
-        type: 'bot',
-        content: "Could you tell me more specifically what kind of goal you're interested in? For example: health, career, learning, or personal development?"
-      };
+
+      setMessages((prev) => [
+        ...prev,
+        { type: "user", content: userMessage },
+        formattedResponse,
+      ]);
+
+      setIsThinking(false);
+
+      return formattedResponse;
+    } catch (error) {
+      console.error("Error fetching AI response:", error);
+
+      setMessages((prev) => [
+        ...prev,
+        { type: "user", content: userMessage },
+        {
+          type: "bot",
+          content: "Oops! Something went wrong. Try again later.",
+        },
+      ]);
+
+      setIsThinking(false);
     }
-    
-    setMessages(prev => [...prev, { type: 'user', content: userMessage }, response]);
-    setIsThinking(false);
-    return response;
   };
 
   const handleSend = async () => {
     if (!input.trim()) return;
-    
+
     const userInput = input;
-    setInput('');
-    
+    setInput("");
+
     const response = await simulateAIResponse(userInput);
     if (response.suggestion) {
       onSelectGoal(response.suggestion);
@@ -100,17 +154,19 @@ function AIGoalAssistant({ onSelectGoal, onClose }) {
             <div
               key={index}
               className={`flex ${
-                message.type === 'user' ? 'justify-end' : 'justify-start'
+                message.type === "user" ? "justify-end" : "justify-start"
               }`}
             >
               <div
                 className={`max-w-[80%] rounded-lg p-3 ${
-                  message.type === 'user'
-                    ? 'bg-purple-600 text-white'
-                    : 'bg-gray-700 text-gray-100'
+                  message.type === "user"
+                    ? "bg-purple-600 text-white"
+                    : "bg-gray-700 text-gray-100"
                 }`}
               >
-                <pre className="whitespace-pre-wrap font-sans">{message.content}</pre>
+                <pre className="whitespace-pre-wrap font-sans">
+                  {message.content}
+                </pre>
                 {message.suggestion && !selectedGoal && (
                   <button
                     onClick={() => handleGoalSelect(message.suggestion)}
@@ -137,7 +193,7 @@ function AIGoalAssistant({ onSelectGoal, onClose }) {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+              onKeyPress={(e) => e.key === "Enter" && handleSend()}
               placeholder="Type your message..."
               className="flex-1 bg-gray-700 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
             />

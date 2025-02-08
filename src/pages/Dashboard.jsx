@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   Target,
   Trophy,
@@ -38,23 +38,16 @@ function Dashboard() {
     type: "",
     xp: 0,
   });
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Morning Meditation",
-      completed: false,
-      xp: 50,
-      priority: "high",
-    },
-    {
-      id: 2,
-      title: "Read 30 minutes",
-      completed: false,
-      xp: 30,
-      priority: "medium",
-    },
-    { id: 3, title: "Workout", completed: false, xp: 40, priority: "high" },
-  ]);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    fetch("/habits.json")
+      .then((response) => response.json())
+      .then((data) => setTasks(data))
+      .catch((error) => console.error("Error fetching habits:", error));
+  }, []);
+
+  console.log(tasks[1]);
 
   const level = Math.floor(progress.xp / 1000) + 1;
   const currentLevelXP = progress.xp % 1000;
@@ -94,6 +87,40 @@ function Dashboard() {
         return "text-green-400";
       default:
         return "text-gray-400";
+    }
+  };
+
+  const [habits, setHabits] = useState(tasks);
+
+  useEffect(() => {
+    setHabits(tasks);
+  }, [tasks]);
+
+  const updateStreak = async (habitid, completed = true) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/habits/${habitid}/streak`, // ✅ Corrected endpoint
+        {
+          method: "PATCH", // ✅ Correct method
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ completed }), // ✅ Send completed boolean
+        }
+      );
+
+      if (response.ok) {
+        const updatedHabit = await response.json();
+        setHabits((prevHabits) =>
+          prevHabits.map((habit) =>
+            habit.id === habitid
+              ? { ...habit, streak: updatedHabit.habit.streak }
+              : habit
+          )
+        );
+      } else {
+        console.error("Failed to update streak:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error updating streak:", error);
     }
   };
 
@@ -173,9 +200,7 @@ function Dashboard() {
             </div>
             <div>
               <div className="text-xs text-gray-400">Day Streak</div>
-              <div className="text-lg font-bold text-white">
-                {progress.streak}
-              </div>
+              <div className="text-lg font-bold text-white">{3}</div>
             </div>
           </div>
         </div>
@@ -184,7 +209,7 @@ function Dashboard() {
         <div className="px-4 pb-32">
           <h2 className="text-xl font-bold text-white mb-4">Today's Quests</h2>
           <div className="space-y-3">
-            {tasks
+            {habits
               .sort((a, b) => {
                 const priorityOrder = { high: 0, medium: 1, low: 2 };
                 return priorityOrder[a.priority] - priorityOrder[b.priority];
@@ -200,7 +225,11 @@ function Dashboard() {
                     <input
                       type="checkbox"
                       checked={task.completed}
-                      onChange={() => handleTaskToggle(task.id)}
+                      onChange={() => {
+                        const isCompleted = !task.completed; // Toggle completed state
+                        handleTaskToggle(task.id);
+                        updateStreak(task.id, isCompleted); // Pass correct value
+                      }}
                       className="h-4 w-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
                     />
                     <div className="ml-3 flex-1">
@@ -223,6 +252,9 @@ function Dashboard() {
                             task.priority.slice(1)}{" "}
                           Priority
                         </span>
+                      </div>
+                      <div className="text-sm text-green-400">
+                        🔥 Streak: {task.streak}
                       </div>
                     </div>
                   </div>
