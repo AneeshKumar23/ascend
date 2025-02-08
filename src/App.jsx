@@ -8,27 +8,46 @@ import Habits from './pages/Habits';
 import Goals from './pages/Goals';
 import Achievements from './pages/Achievements';
 import Profile from './pages/Profile';
+import PremiumPage from './pages/Premium';
 import Navbar from './components/Navbar';
-import ProgressPopup from './components/ProgressPopup';
 
-// Create context for global state
 export const UserContext = createContext();
 
 function App() {
   const [user, setUser] = useState(null);
+  const [showPremiumPopup, setShowPremiumPopup] = useState(false);
 
-  // Check if user is logged in
+  // Load user from localStorage on initial load
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+        localStorage.removeItem('user');
+      }
     }
   }, []);
 
-  // Protected Route component
+  // Show premium popup when user state changes
+  useEffect(() => {
+    if (user) {
+      console.log('User logged in:', user);
+      if (!sessionStorage.getItem('loginShown')) {
+        console.log('Showing premium popup');
+        setShowPremiumPopup(true);
+        sessionStorage.setItem('loginShown', 'true');
+      }
+    } else {
+      console.log('No user logged in');
+    }
+  }, [user]);
+
   const ProtectedRoute = ({ children }) => {
     if (!user) {
-      return <Navigate to="/" />;
+      return <Navigate to="/" replace />;
     }
     return children;
   };
@@ -38,47 +57,44 @@ function App() {
       <ProgressProvider>
         <BrowserRouter>
           <div className="min-h-screen bg-gray-900 text-gray-100">
+            {/* Premium Popup Overlay */}
+            {showPremiumPopup && (
+              <div className="fixed inset-0 bg-black bg-opacity-75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                <PremiumPage onClose={() => setShowPremiumPopup(false)} />
+              </div>
+            )}
+
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/dashboard" element={
                 <ProtectedRoute>
-                  <>
-                    <Dashboard />
-                    <Navbar />
-                  </>
+                  <Dashboard />
+                  <Navbar />
                 </ProtectedRoute>
               } />
               <Route path="/habits" element={
                 <ProtectedRoute>
-                  <>
-                    <Habits />
-                    <Navbar />
-                  </>
+                  <Habits />
+                  <Navbar />
                 </ProtectedRoute>
               } />
               <Route path="/goals" element={
                 <ProtectedRoute>
-                  <>
-                    <Goals />
-                    <Navbar />
-                  </>
+                  <Goals />
+                  <Navbar />
                 </ProtectedRoute>
               } />
               <Route path="/achievements" element={
                 <ProtectedRoute>
-                  <>
-                    <Achievements />
-                    <Navbar />
-                  </>
+                  <Achievements />
+                  <Navbar />
                 </ProtectedRoute>
               } />
               <Route path="/profile" element={
                 <ProtectedRoute>
-                  <>
-                    <Profile />
-                    <Navbar />
-                  </>
+                  <Profile />
+                  <Navbar />
                 </ProtectedRoute>
               } />
             </Routes>
