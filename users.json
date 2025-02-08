@@ -34,5 +34,17 @@
       "notifications": true,
       "theme": "dark"
     }
+  },
+  "aneesh@gmail.com": {
+    "id": "4",
+    "username": "Aneesh",
+    "email": "aneesh@gmail.com",
+    "password": "123456",
+    "avatar": "https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?auto=format&fit=crop&w=150&h=150",
+    "dateJoined": "2025-02-07",
+    "preferences": {
+      "notifications": true,
+      "theme": "dark"
+    }
   }
 }
