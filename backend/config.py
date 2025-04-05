@@ -8,9 +8,10 @@ genai.configure(api_key=os.getenv("API_KEY"))
 
 MODEL_NAME = "gemini-2.0-flash"
 MODEL = genai.GenerativeModel(MODEL_NAME)
-HABITS_FILE = "habits.json"
-GOALS_FILE = "goals.json"
-USERS_FILE = "users.json"
+
+HABITS_FILE = os.path.join("database", "habits.json")
+GOALS_FILE = os.path.join("database", "goals.json")
+USERS_FILE = os.path.join("database", "users.json")
 
 BASE_PROMPT = """{
         type: 'bot',
