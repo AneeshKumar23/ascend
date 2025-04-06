@@ -66,7 +66,7 @@ def recommend_habits(request: PromptRequest):
         client = ollama.Client(host=OLLAMA_HOST)
         
         response = client.generate(model=MODEL_NAME, prompt=base + prompt)
-        data = json.loads(response['response'][7:-4])
+        data = json.loads(response['response'])
         
         goals = load_goals()
         goals.append(data["suggestion"])
@@ -117,7 +117,7 @@ def register(user: UserSignup):
         "email": user.email,
         "password": user.password,  
         "avatar": user.avatar,
-        "dateJoined": "2025-02-07",
+        "dateJoined": datetime.now().strftime("%Y-%m-%d"),
         "preferences": {
             "notifications": True,
             "theme": "dark",
@@ -161,4 +161,4 @@ if __name__ == "__main__":
             json.dump({}, file)
 
 
-    uvicorn.run("master:app", host="0.0.0.0", port=8080, reload=True)
+    uvicorn.run("master:app", host="0.0.0.0", port=8080)
