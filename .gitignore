@@ -33,6 +33,8 @@ __pycache__/
 *.njsproj
 *.sln
 *.sw?
+
+backend/.env
 <<<<<<< HEAD
 __pycache__/master.cpython-313.pyc
 =======
