@@ -1,13 +1,12 @@
 # ASCEND - AI-Driven Skill Development Platform
 
-
-**ASCEND** is a lightweight, accessible, and ethical skill development platform powered by AI. It's designed to help individuals acquire and track new skills, supporting career growth and professional development.
+**ASCEND** is a lightweight, accessible, and ethical skill development platform powered by AI. It's designed to help individuals acquire and track new skills, supporting career growth and professional development through both individual and community-driven learning.
 
 ---
 
 ## 🎯 Purpose
 
-ASCEND empowers users to develop new skills, track learning progress, and receive AI driven guidance, while respecting real-world constraints such as:
+ASCEND empowers users to develop new skills, track learning progress, and receive AI-driven guidance—while respecting real-world constraints such as:
 
 - Low-bandwidth connectivity
 - Basic device access (feature/shared phones)
@@ -49,6 +48,12 @@ Monitor your skill development journey and track achievements.
 
 Secure authentication to protect your learning progress and personal data.
 
+### Community Features
+- **Shared Goals**: Create and join community skill development goals
+- **Leaderboards**: Track progress against peers and community members
+- **Daily Challenges**: Participate in community-wide skill improvement activities
+- **Achievement Badges**: Earn recognition for community participation and skill mastery
+
 ---
 
 ## 🎓 Skill Development Focus Areas
@@ -58,6 +63,28 @@ Secure authentication to protect your learning progress and personal data.
 - **Creative Skills**: Design, writing, content creation
 - **Language Learning**: Vocabulary building, grammar practice, conversation skills
 - **Certification Prep**: Study tracking, exam preparation, practice tests
+
+---
+
+## 👥 Community Engagement
+
+### Shared Goals
+- Create public goals for community participation
+- Join existing community challenges
+- Collaborate with peers on skill development
+- Share progress and achievements
+
+### Leaderboards
+- Track individual progress against community
+- Compete in skill-specific rankings
+- Earn XP and badges for achievements
+- Weekly and monthly community challenges
+
+### Daily Improvement Activities
+- Community-wide daily challenges
+- Skill-specific practice sessions
+- Peer learning opportunities
+- Progress sharing and feedback
 
 ---
 
@@ -71,8 +98,9 @@ Secure authentication to protect your learning progress and personal data.
 
 ### Backend
 - FastAPI (Python)
-- Ollama (LLaMa3.1 models)
-- Local JSON-based storage (MangoDB future implementation)
+- Ollama (Llama3.1 models)
+- Local JSON-based storage (MongoDB future implementation)
+- Real-time updates for community features
 
 ---
 
@@ -128,12 +156,12 @@ ascend/
 │   └── src/
 │       ├── components/
 │       ├── context/
-│       └── pages/
+│       ├── pages/
 ├── backend/               # FastAPI app
 │   ├── app.py
 │   ├── models.py
 │   ├── utils.py
-│   └── config.py
+│   ├── config.py
 └── README.md
 ```
 
