@@ -1,13 +1,11 @@
-import google.generativeai as genai
+import ollama
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
-genai.configure(api_key=os.getenv("API_KEY"))
-
-MODEL_NAME = "gemini-2.0-flash"
-MODEL = genai.GenerativeModel(MODEL_NAME)
+OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
+MODEL_NAME = "llama3.1"
 
 HABITS_FILE = os.path.join("database", "habits.json")
 GOALS_FILE = os.path.join("database", "goals.json")

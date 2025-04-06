@@ -1,11 +1,12 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from backend.models import Goal, Habit, PromptRequest, StreakUpdate, UserSignup, LoginRequest
-from backend.config import HABITS_FILE, USERS_FILE, GOALS_FILE, MODEL, BASE_PROMPT
+from backend.config import HABITS_FILE, USERS_FILE, GOALS_FILE, MODEL_NAME, BASE_PROMPT, OLLAMA_HOST
 from utils import *
 import json
 import os
 import uvicorn
+import ollama
 
 
 
@@ -62,8 +63,10 @@ def recommend_habits(request: PromptRequest):
     base = BASE_PROMPT
 
     try:
-        response = MODEL.generate_content(base + prompt).text
-        data = json.loads(response[7:-4])
+        client = ollama.Client(host=OLLAMA_HOST)
+        
+        response = client.generate(model=MODEL_NAME, prompt=base + prompt)
+        data = json.loads(response['response'][7:-4])
         
         goals = load_goals()
         goals.append(data["suggestion"])
@@ -72,6 +75,8 @@ def recommend_habits(request: PromptRequest):
         
     except (json.JSONDecodeError, KeyError) as e:
         raise HTTPException(status_code=500, detail=f"Error parsing response: {e}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generating response: {e}")
 
 
 @app.patch("/habits/{habit_id}/streak")
